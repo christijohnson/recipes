@@ -1,0 +1,32 @@
+{
+  "name": "recipes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/christijohnson/recipes-cse341.git"
+  },
+  "author": "Christi Johnson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/christijohnson/recipes-cse341/issues"
+  },
+  "homepage": "https://github.com/christijohnson/recipes-cse341#readme",
+  "keywords": [],
+  
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.4.1",
+    "express": "^4.18.2",
+    "mongodb": "^6.3.0",
+    "nodemon": "^3.0.3",
+    "swagger-autogen": "^2.23.7",
+    "swagger-ui-express": "^5.0.0"
+  }
+}
