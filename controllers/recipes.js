@@ -26,7 +26,7 @@ const postNew = async (req, res) => {
         cookTime: req.body.cookTime,
         servings: req.body.servings,
         source: req.body.source,
-        ingredientId: req.body.ingredientId,
+        ingredients: req.body.ingredients,
         directions: req.body.directions
     };
     const response = await mongodb.getDb().db().collection('recipes').insertOne(recipe);
@@ -48,7 +48,7 @@ const putUpdate = async (req, res) => {
         cookTime: req.body.cookTime,
         servings: req.body.servings,
         source: req.body.source,
-        ingredientId: req.body.ingredientId,
+        ingredients: req.body.ingredients,
         directions: req.body.directions
     };
     const response = await mongodb.getDb().db().collection('recipes').replaceOne({ _id: recipeId }, recipe);
@@ -77,4 +77,4 @@ module.exports = {
     postNew,
     putUpdate,
     deleteRecipe
-};
+}

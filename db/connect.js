@@ -1,6 +1,6 @@
 const dotenv = require('dotenv');
 dotenv.config();
-const mongoClient = require('mongodb').MongoClient;
+const MongoClient = require('mongodb').MongoClient;
 
 let _db;
 
@@ -28,7 +28,7 @@ const getDb = () => {
     return _db
 };
 
-module.exports - {
+module.exports = {
     initDb,
     getDb
 };

@@ -1,0 +1,15 @@
+{
+    "name": "tacos",
+    "category": "mexican",
+    "prepTime": "5 min",
+    "cookTime": "10 min",
+    "servings": "8",
+    "source": "family",
+    "ingredients": [
+      {"ingredient-id": "65c6f0b75c7910857c0ac663", "quantity": "1", "uom": "lb"},
+      {"ingredient-id": "65c6f0b75c7910857c0ac664", "quantity": "3", "uom": "tbs"},
+      {"ingredient-id": "65c6f0b75c7910857c0ac665", "quantity": "8", "uom": "oz"},
+      {"ingredient-id": "65c6f0b75c7910857c0ac666", "quantity": "12", "uom": "oz"}
+    ],
+    "directions": "Cook meat, add seasoning; then add toppings"
+  }

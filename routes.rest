@@ -1,0 +1,48 @@
+GET http://localhost:8080/recipes
+###
+GET http://localhost:8080/recipes/65c6f1825c7910857c0ac66b
+###
+GET http://localhost:8080/ingredients
+###
+GET http://localhost:8080/ingredients/65c6f0b75c7910857c0ac665
+###
+POST http://localhost:8080/recipes HTTP/1.1
+content-type: application/json
+
+{
+    "name": "grilled cheese sandwich",
+    "category": "sandwich",
+    "prepTime": "2 min",
+    "cookTime": "7 min",
+    "servings": "1",
+    "source": "family",
+    "ingredients": [
+      {"ingredient-id": "65c6fc3493bab5c230eee2c6", "quantity": "2", "uom": "slice"}, 
+      {"ingredient-id": "65c6fc5f93bab5c230eee2c7", "quantity": "1", "uom": "tbs"},
+      {"ingredient-id": "65c6f0b75c7910857c0ac665", "quantity": "2", "uom": "oz"}
+    ],
+    "directions": "Spread butter on both outer slices of bread with cheese between.  Place on hot griddle, flip when side is golden brown."
+  }
+
+###
+POST http://localhost:8080/ingredients HTTP/1.1
+content-type: application/json
+
+
+    # {
+    #   "name": "bread",
+    #   "type": "bakery"
+    # }
+    {
+      "name": "butter",
+      "type": "dairy"
+    }
+  
+
+###
+PUT http://localhost:8080/recipes HTTP/1.1
+content-type: application/json
+###
+DELETE http://localhost:8080/recipes HTTP/1.1
+content-type: application/json
+###
