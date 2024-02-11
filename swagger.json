@@ -5,7 +5,7 @@
     "description": "Recipe Book API",
     "version": "1.0.0"
   },
-  "host": "https://recipe-book-l98l.onrender.com",
+  "host": "recipe-book-l98l.onrender.com",
   "basePath": "/",
   "schemes": [
     "http",

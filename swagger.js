@@ -6,7 +6,7 @@ const doc = {
         description: 'Recipe Book API'
     },
     // host: 'localhost:8080',
-    host: 'https://recipe-book-l98l.onrender.com',
+    host: 'recipe-book-l98l.onrender.com',
     schemes: ['http', 'https']
 };
 
