@@ -46,3 +46,50 @@ content-type: application/json
 DELETE http://localhost:8080/recipes HTTP/1.1
 content-type: application/json
 ###
+
+// production - Render
+GET https://recipe-book-l98l.onrender.com/recipes
+###
+GET https://recipe-book-l98l.onrender.com/recipes/65c6f1825c7910857c0ac66b
+###
+GET https://recipe-book-l98l.onrender.com/ingredients
+###
+GET https://recipe-book-l98l.onrender.com/ingredients/65c6f0b75c7910857c0ac665
+###
+POST https://recipe-book-l98l.onrender.com/recipes HTTP/1.1
+content-type: application/json
+
+{
+    "name": "french toast",
+    "category": "breakfast",
+    "prepTime": "5 min",
+    "cookTime": "10 min",
+    "servings": "6",
+    "source": "family",
+    "ingredients": [
+      {"ingredient-id": "65c6fc3493bab5c230eee2c6", "quantity": "12", "uom": "slice"}, 
+      {"ingredient-id": "65c821431498223f23276e5d", "quantity": "4", "uom": "each"},
+      {"ingredient-id": "65c8216c1498223f23276e5e", "quantity": "1", "uom": "dash"},
+      {"ingredient-id": "65c821811498223f23276e5f", "quantity": "1", "uom": "cup"},
+      {"ingredient-id": "65c8219a1498223f23276e60", "quantity": "2", "uom": "dash"}
+    ],
+    "directions": "Whisk together the eggs, vanilla, cinnamon, and milk.  Dip bread slices into the egg mixture and place on a hot griddle until the egg is cook, approximately 3 minutes.  Flip and cook the other side.  Serve with syrup or powdered sugar."
+  }
+
+###
+POST https://recipe-book-l98l.onrender.com/ingredients HTTP/1.1
+content-type: application/json
+
+    {
+      "name": "cinnamon",
+      "type": "spice"
+    }
+  
+
+###
+PUT https://recipe-book-l98l.onrender.com/recipes HTTP/1.1
+content-type: application/json
+###
+DELETE https://recipe-book-l98l.onrender.com/recipes HTTP/1.1
+content-type: application/json
+###
