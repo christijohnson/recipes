@@ -81,8 +81,8 @@ POST https://recipe-book-l98l.onrender.com/ingredients HTTP/1.1
 content-type: application/json
 
     {
-      "name": "cinnamon",
-      "type": "spice"
+      "name": "flour",
+      "type": "dry-goods"
     }
   
 
