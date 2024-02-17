@@ -1,73 +1,151 @@
 const mongodb = require('../db/connect');
-const ObjectId = require('mongodb').ObjectId;
+const { ObjectId } = require('mongodb');
 
 const getAll = async (req, res) => {
-    const result = await mongodb.getDb().db().collection('recipes').find();
-    result.toArray().then((lists) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.status(200).json(lists);
-    });
+    try {
+        const recipesCursor = await mongodb.getDb().db().collection('recipes').find();
+        
+        // Convert cursor to array using toArray() method
+        const recipesArray = await recipesCursor.toArray();
+        
+        // Send response with the array of recipes
+        res.status(200).json(recipesArray);
+    } catch (error) {
+        // Handle error
+        console.error("Error while retrieving recipes:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
 };
 
 const getSingle = async (req, res) => {
-    const recipeId = new ObjectId(req.params.id);
-    const result = await mongodb.getDb().db().collection('recipes').find({ _id: recipeId });
-    result.toArray().then((lists) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.status(200).json(lists[0]);
-    });
+    try {
+        // Validate recipeId
+        const recipeId = req.params.id;
+        if (!ObjectId.isValid(recipeId)) {
+            return res.status(400).json({ error: 'Invalid recipe ID' });
+        }
+
+        // Convert recipeId to ObjectId
+        const objectId = new ObjectId(recipeId);
+
+        // Query the database
+        const recipe = await mongodb.getDb().db().collection('recipes').findOne({ _id: objectId });
+
+        if (recipe) {
+            res.status(200).json(recipe);
+        } else {
+            res.status(404).json({ error: 'Recipe not found' });
+        }
+    } catch (error) {
+        console.error("Error while retrieving recipe:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
 };
 
 const postNew = async (req, res) => {
-    const recipe = {
-        name: req.body.name,
-        category: req.body.category,
-        prepTime: req.body.prepTime,
-        cookTime: req.body.cookTime,
-        servings: req.body.servings,
-        source: req.body.source,
-        ingredients: req.body.ingredients,
-        directions: req.body.directions
-    };
-    const response = await mongodb.getDb().db().collection('recipes').insertOne(recipe);
-    if (response.acknowledged) {
-        res.status(201).json(response);
-    } else {
-        res
-            .status(500)
-            .json(response.error || 'Sorry, this recipe was not created.');
+    try {
+        // Validate required fields
+        const requiredFields = ['name', 'category', 'prepTime', 'cookTime', 'servings', 'source', 'ingredients', 'directions'];
+        for (const field of requiredFields) {
+            if (!req.body[field]) {
+                return res.status(400).json({ error: `${field} is required` });
+            }
+        }
+
+        // Validate data types
+        if (typeof req.body.prepTime !== 'number' || typeof req.body.cookTime !== 'number' || typeof req.body.servings !== 'number') {
+            return res.status(400).json({ error: 'Invalid data type for prepTime, cookTime, or servings' });
+        }
+
+        // Insert the recipe into the database
+        const recipe = {
+            name: req.body.name,
+            category: req.body.category,
+            prepTime: req.body.prepTime,
+            cookTime: req.body.cookTime,
+            servings: req.body.servings,
+            source: req.body.source,
+            ingredients: req.body.ingredients,
+            directions: req.body.directions
+        };
+
+        const response = await mongodb.getDb().db().collection('recipes').insertOne(recipe);
+
+        if (response.acknowledged) {
+            res.status(201).json(response);
+        } else {
+            res.status(500).json(response.error || 'Sorry, this recipe was not created.');
+        }
+    } catch (error) {
+        console.error("Error while creating new recipe:", error);
+        res.status(500).json({ error: "Internal server error" });
     }
 };
 
 const putUpdate = async (req, res) => {
-    const recipeId = new ObjectId(req.params.id);
-    const recipe = {
-        name: req.body.name,
-        category: req.body.category,
-        prepTime: req.body.prepTime,
-        cookTime: req.body.cookTime,
-        servings: req.body.servings,
-        source: req.body.source,
-        ingredients: req.body.ingredients,
-        directions: req.body.directions
-    };
-    const response = await mongodb.getDb().db().collection('recipes').replaceOne({ _id: recipeId }, recipe);
-    console.log(response);
-    if (response.modifiedCount > 0) {
-        res.status(204).send();
-    } else {
-        res.status(500).json(response.error || 'Recipe not updated, check for error.');
+    try {
+        // Validate recipeId
+        const recipeId = req.params.id;
+        if (!ObjectId.isValid(recipeId)) {
+            return res.status(400).json({ error: 'Invalid recipe ID' });
+        }
+
+        // Validate input fields
+        const { name, category, prepTime, cookTime, servings, source, ingredients, directions } = req.body;
+        if (!name || !category || typeof prepTime !== 'number' || typeof cookTime !== 'number' || typeof servings !== 'number' || !source || !ingredients || !directions) {
+            return res.status(400).json({ error: 'Missing or invalid input fields' });
+        }
+
+        // Construct recipe updates
+        const recipeUpdates = {
+            $set: {
+                name,
+                category,
+                prepTime,
+                cookTime,
+                servings,
+                source,
+                ingredients,
+                directions
+            }
+        };
+
+        // Update the recipe in the database
+        const response = await mongodb.getDb().db().collection('recipes').updateOne({ _id: new ObjectId(recipeId) }, recipeUpdates);
+
+        if (response.modifiedCount > 0) {
+            res.status(204).send();
+        } else {
+            res.status(404).json({ error: 'Recipe not found' });
+        }
+    } catch (error) {
+        console.error("Error while updating recipe:", error);
+        res.status(500).json({ error: "Internal server error" });
     }
 };
 
 const deleteRecipe = async (req, res) => {
-    const recipeId = new ObjectId(req.params.id);
-    const response = await mongodb.getDb().db().collection('recipes').deleteOne({ _id: recipeId }, true);
-    console.log(response);
-    if (response, deletedCount > 0) {
-        res.status(200).send();
-    } else {
-        res.status(500).json(response.error || 'Recipe was not deleted.')
+    try {
+        // Validate recipeId
+        const recipeId = req.params.id;
+        if (!ObjectId.isValid(recipeId)) {
+            return res.status(400).json({ error: 'Invalid recipe ID' });
+        }
+
+        // Convert recipeId to ObjectId
+        const objectId = new ObjectId(recipeId);
+
+        // Delete the recipe from the database
+        const response = await mongodb.getDb().db().collection('recipes').deleteOne({ _id: objectId });
+
+        if (response.deletedCount > 0) {
+            res.status(200).send();
+        } else {
+            res.status(404).json({ error: 'Recipe not found' });
+        }
+    } catch (error) {
+        console.error("Error while deleting recipe:", error);
+        res.status(500).json({ error: "Internal server error" });
     }
 };
 

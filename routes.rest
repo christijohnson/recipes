@@ -4,7 +4,7 @@ GET http://localhost:8080/recipes/65c6f1825c7910857c0ac66b
 ###
 GET http://localhost:8080/ingredients
 ###
-GET http://localhost:8080/ingredients/65c6f0b75c7910857c0ac665
+GET http://localhost:8080/ingredients/65c6f0b75c7910857c0ac663
 ###
 POST http://localhost:8080/recipes HTTP/1.1
 content-type: application/json
