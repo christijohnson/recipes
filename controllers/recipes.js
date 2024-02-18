@@ -54,7 +54,7 @@ const postNew = async (req, res) => {
 
         // Validate data types
         if (typeof req.body.prepTime !== 'string' || typeof req.body.cookTime !== 'string' || typeof req.body.servings !== 'number') {
-            return res.status(400).json({ error: 'Invalid data type for prepTime, cookTime, or servings' });
+            return res.status(400).json({ error: 'Invalid data type for servings' });
         }
 
         // Insert the recipe into the database
