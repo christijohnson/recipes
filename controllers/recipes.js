@@ -53,7 +53,7 @@ const postNew = async (req, res) => {
         }
 
         // Validate data types
-        if (typeof req.body.prepTime !== 'string' || typeof req.body.cookTime !== 'string' || typeof req.body.servings !== 'string') {
+        if (typeof req.body.prepTime !== 'string' || typeof req.body.cookTime !== 'string' || typeof req.body.servings !== 'number') {
             return res.status(400).json({ error: 'Invalid data type for prepTime, cookTime, or servings' });
         }
 
@@ -92,7 +92,7 @@ const putUpdate = async (req, res) => {
 
         // Validate input fields
         const { name, category, prepTime, cookTime, servings, source, ingredients, directions } = req.body;
-        if (!name || !category || typeof prepTime !== 'number' || typeof cookTime !== 'number' || typeof servings !== 'number' || !source || !ingredients || !directions) {
+        if (!name || !category || typeof prepTime !== 'string' || typeof cookTime !== 'string' || typeof servings !== 'number' || !source || !ingredients || !directions) {
             return res.status(400).json({ error: 'Missing or invalid input fields' });
         }
 
