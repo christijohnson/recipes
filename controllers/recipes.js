@@ -53,7 +53,7 @@ const postNew = async (req, res) => {
         }
 
         // Validate data types
-        if (typeof req.body.prepTime !== 'number' || typeof req.body.cookTime !== 'number' || typeof req.body.servings !== 'number') {
+        if (typeof req.body.prepTime !== 'string' || typeof req.body.cookTime !== 'string' || typeof req.body.servings !== 'string') {
             return res.status(400).json({ error: 'Invalid data type for prepTime, cookTime, or servings' });
         }
 
