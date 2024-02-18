@@ -24,6 +24,7 @@
     },
     "/recipes/": {
       "get": {
+        "tags": ["recipe"],
         "description": "",
         "produces": [
           "application/json"
@@ -35,6 +36,7 @@
         }
       },
       "post": {
+        "tags": ["recipe"],
         "description": "",
         "parameters": [
           {
@@ -83,7 +85,8 @@
     },
     "/recipes/{id}": {
       "get": {
-        "description": "",
+        "tags": ["recipe"],
+        "description": "Get Recipe by ID  (tacos: 65c6f1825c7910857c0ac66b)",
         "produces": [
           "application/json"
         ],
@@ -102,6 +105,7 @@
         }
       },
       "put": {
+        "tags": ["recipe"],
         "description": "",
         "parameters": [
           {
@@ -154,6 +158,7 @@
         }
       },
       "delete": {
+        "tags": ["recipe"],
         "description": "",
         "parameters": [
           {
@@ -175,6 +180,7 @@
     },
     "/ingredients/": {
       "get": {
+        "tags": ["ingredient"],
         "description": "",
         "produces": [
           "application/json"
@@ -186,6 +192,7 @@
         }
       },
       "post": {
+        "tags": ["ingredient"],
         "description": "",
         "parameters": [
           {
@@ -216,7 +223,8 @@
     },
     "/ingredients/{id}": {
       "get": {
-        "description": "",
+        "tags": ["ingredient"],
+        "description": "Get Ingredient by ID  (lettuce: 65c6f0b75c7910857c0ac666)",
         "produces": [
           "application/json"
         ],
@@ -235,6 +243,7 @@
         }
       },
       "put": {
+        "tags": ["ingredient"],
         "description": "",
         "parameters": [
           {
@@ -269,6 +278,7 @@
         }
       },
       "delete": {
+        "tags": ["ingredient"],
         "description": "",
         "parameters": [
           {
