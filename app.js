@@ -30,10 +30,6 @@ app.get('/profile', requiresAuth(), (req, res) => {
     res.send(JSON.stringify(req.oidc.user));
 });
 
-// app.listen(port, () => {
-    // console.log(`Listening on port ${port}`);
-// });
-
 app
     .use(bodyParser.json())
     .use((req, res, next) => {
