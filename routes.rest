@@ -93,3 +93,54 @@ content-type: application/json
 DELETE https://recipe-book-l98l.onrender.com/recipes HTTP/1.1
 content-type: application/json
 ###
+
+{
+      "name": "tomato",
+      "type": "produce"
+    }
+put 65d0d22dd36b63fce020d197
+
+del 65d1714ca41a5818db0fc2e9 -recipe
+
+val - put 65c6f1825c7910857c0ac66b - number of serv
+{
+    "name": "tacos",
+    "category": "mexican",
+    "cookTime": "9 min",
+    "prepTime": "5 min",
+    "servings": "8",
+    "source": "family",
+    "ingredients": [
+      {
+        "ingredient-id": "65c6f0b75c7910857c0ac663",
+        "quantity": "1",
+        "uom": "lb"
+      },
+      {
+        "ingredient-id": "65c6f0b75c7910857c0ac664",
+        "quantity": "3",
+        "uom": "tbs"
+      },
+      {
+        "ingredient-id": "65c6f0b75c7910857c0ac665",
+        "quantity": "8",
+        "uom": "oz"
+      },
+      {
+        "ingredient-id": "65c6f0b75c7910857c0ac666",
+        "quantity": "12",
+        "uom": "oz"
+      }
+    ],
+    "directions": "Cook meat, add seasoning; then add toppings"
+  }
+
+post - remove type
+{
+    "name": "green pepper",
+    "type": "produce"
+  }
+
+del 65d03847a4ad6077e6917790 - remove # from id
+
+get 65c839f996fd9a6dd6ec179b - remove #
