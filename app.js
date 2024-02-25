@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongodb = require('./db/connect');
+const router = express.Router();
 
 // port
 const PORT = process.env.PORT || 8080;
@@ -19,14 +20,14 @@ const config = {
 };
 
 // auth router attaches /login, /logout, and /callback routes to baseURL
-app.use(auth(config));
+router.use(auth(config));
 
 // req.isAuthenticated is provided from auth router
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
     res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
 });
 
-app.get('/profile', requiresAuth(), (req, res) => {
+router.get('/profile', requiresAuth(), (req, res) => {
     res.send(JSON.stringify(req.oidc.user));
 });
 
@@ -46,3 +47,5 @@ mongodb.initDb((err) => {
         console.log(`Connected to DB and listening on ${PORT}`);
     }
 });
+
+module.exports = router;
