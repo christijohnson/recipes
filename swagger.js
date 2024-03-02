@@ -7,7 +7,7 @@ const doc = {
     },
     // host: 'localhost:8080',
     host: 'recipe-book-l98l.onrender.com',
-    schemes: ['http', 'https']
+    schemes: ['https']
 };
 
 const outputFile = './swagger.json';

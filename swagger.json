@@ -8,7 +8,6 @@
   "host": "recipe-book-l98l.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http",
     "https"
   ],
   "paths": {
